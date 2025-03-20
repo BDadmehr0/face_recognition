@@ -1,14 +1,15 @@
-mport http.server
-import socketserver
+import http.server
 import os
+import socketserver
+
 
 def httpp():
     class CustomHandler(http.server.SimpleHTTPRequestHandler):
         def do_GET(self):
-            if self.path == "CHECK.txt" :
+            if self.path == "CHECK.txt":
                 self.path = "CHECK.txt"
                 return http.server.SimpleHTTPRequestHandler.do_GET(self)
-            else :
+            else:
                 self.send_error(404, "File not found")
 
     PORT = 8000

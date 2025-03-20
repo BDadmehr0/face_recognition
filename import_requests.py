@@ -1,12 +1,13 @@
-import requests
 import os
 from datetime import date
+
+import requests
 
 # آدرس سرور و فایل موردنظر
 SERVER_IP = "192.168.1.55"
 PORT = 8000
 today = date.today().strftime("%Y-%m-%d")
-FILENAME = f'{today}.txt'  # نام فایل موردنظر
+FILENAME = f"{today}.txt"  # نام فایل موردنظر
 SAVE_PATH = "c:/hirad/random"  # مسیر ذخیره فایل در کلاینت
 
 # اطمینان از وجود مسیر ذخیره‌سازی

@@ -1,6 +1,7 @@
 import time
-import board
+
 import adafruit_fingerprint
+import board
 import serial
 
 uart = serial.Serial("/dev/ttyAMA0", baudrate=57600, timeout=1)
@@ -8,6 +9,7 @@ uart = serial.Serial("/dev/ttyAMA0", baudrate=57600, timeout=1)
 finger = adafruit_fingerprint.Adafruit_Fingerprint(uart)
 
 ##################################################
+
 
 def get_fingerprint():
     """Get a finger print image, template it, and see if it matches!"""
@@ -21,6 +23,7 @@ def get_fingerprint():
     if finger.finger_search() != adafruit_fingerprint.OK:
         return False
     return True
+
 
 def get_fingerprint_detail():
     """Get a finger print image, template it, and see if it matches!
@@ -64,6 +67,7 @@ def get_fingerprint_detail():
         else:
             print("Other error")
         return False
+
 
 def enroll_finger(location):
     """Take a 2 finger images and template it, then store in 'location'"""
@@ -134,7 +138,9 @@ def enroll_finger(location):
 
     return True
 
+
 ##################################################
+
 
 def get_num():
     """Use input() to get a valid number from 1 to 127. Retry till success!"""
@@ -145,6 +151,8 @@ def get_num():
         except ValueError:
             pass
     return i
+
+
 # تابعی برای خواندن فایل و تبدیل به دیکشنری
 def load_fingerprint_data(filename="fingerprints.txt"):
     fingerprint_dict = {}  # دیکشنری برای نگه‌داری داده‌ها
@@ -158,6 +166,8 @@ def load_fingerprint_data(filename="fingerprints.txt"):
     except FileNotFoundError:
         print("Error: File not found!")
     return fingerprint_dict
+
+
 def check_and_store(value, filename="data.txt"):
     try:
         with open(filename, "r") as file:
@@ -172,6 +182,7 @@ def check_and_store(value, filename="data.txt"):
     else:
         print(f'"{value}" قبلاً در فایل وجود دارد.')
 
+
 # بارگذاری نام‌ها از فایل
 fingerprint_names = load_fingerprint_data()
 
@@ -184,7 +195,7 @@ while True:
     print("f) find print")
     print("d) delete print")
     print("----------------")
-    
+
     # تابع بررسی اثر انگشت
     if get_fingerprint():
         user_id = finger.finger_id
@@ -192,7 +203,9 @@ while True:
 
         # بررسی اینکه ID در دیکشنری وجود دارد یا نه
         if user_id in fingerprint_names:
-            print("Detected:", fingerprint_names[user_id], "with confidence", confidence)
+            print(
+                "Detected:", fingerprint_names[user_id], "with confidence", confidence
+            )
             # تست کد
         check_and_store("test_value")
 
